@@ -7,7 +7,8 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  site: 'https://leospiders.github.io',
-  base: 'news-astro',
+  site: "https://leospiders.github.io/news-astro/",
+  integrations: [],
+  output: "static",
   
 });
