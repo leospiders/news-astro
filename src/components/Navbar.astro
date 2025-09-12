@@ -1,0 +1,52 @@
+---
+import { map } from "astro:schema";
+import Logo from "../assets/images/logo.svg";
+import IconOpen from "../assets/images/icon-menu.svg";
+import IconClose from "../assets/images/icon-menu-close.svg";
+import NavbarItems from "./NavbarItems.astro";
+---
+
+<nav class="flex justify-between items-center py-5">
+  <a href="/">
+  <Logo />
+    
+  </a>
+  <NavbarItems isHorizontal={true} />
+
+  <IconOpen id="open-btn" class="cursor-pointer lg:hidden" />
+  <div id="menu-modal" class="bg-black/50 fixed inset-0 hidden">
+    <div
+      class="flex flex-col items-end  bg-off-white absolute right-0 h-screen py-7 px-5"
+    >
+      <IconClose id="close-btn" class="cursor-pointer" />
+      <NavbarItems />
+    </div>
+  </div>
+</nav>
+
+<script>
+  function setupNavbar() {
+    const closeBtn = document.getElementById("close-btn");
+    const openBtn = document.getElementById("open-btn");
+    const modal = document.getElementById("menu-modal");
+    const menuItems = document.querySelectorAll("a");
+
+    closeBtn?.addEventListener("click", () => {
+      modal?.classList.add("hidden");
+    });
+
+    openBtn?.addEventListener("click", () => {
+      modal?.classList.remove("hidden");
+    });
+
+    menuItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        modal?.classList.add("hidden");
+      });
+    });
+  }
+
+  setupNavbar();
+
+  document.addEventListener("astro:page-load", setupNavbar);
+</script>
